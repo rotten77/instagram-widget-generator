@@ -8,15 +8,15 @@ from crop_to_aspect import Image
 # config
 INSTAGRAM_LOGIN = ''
 INSTAGRAM_PASSWORD = ''
-THUMBNAIL_SIZE = 50
-OFFSET = 5
-GRID = 3
-BACKGROUND_COLOR = (0, 128, 23, 20)
+THUMBNAIL_SIZE = 60
+OFFSET = 10
+GRID = 4
+BACKGROUND_COLOR = (255, 255, 255, 255)
 
 # config check
-if INSTAGRAM_LOGIN=='' or INSTAGRAM_PASSWORD=='':
-    print('Fill in credentials')
-    exit
+if INSTAGRAM_LOGIN=='':
+    print('Fill in INSTAGRAM_LOGIN')
+    exit()
 
 # data folder
 data_folder = str(pathlib.Path(__file__).parent.absolute())
@@ -25,7 +25,10 @@ data_folder = str(pathlib.Path(__file__).parent.absolute())
 file_list = []
 
 L = instaloader.Instaloader(save_metadata=False)
-L.login(INSTAGRAM_LOGIN, INSTAGRAM_PASSWORD)
+
+if INSTAGRAM_PASSWORD!='':
+    L.login(INSTAGRAM_LOGIN, INSTAGRAM_PASSWORD)
+
 posts = instaloader.Profile.from_username(L.context, INSTAGRAM_LOGIN).get_posts()
 
 counter=0
